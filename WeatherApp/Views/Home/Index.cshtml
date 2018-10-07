@@ -1,0 +1,53 @@
+﻿
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title Weather Application</title>
+    @Styles.Render("~/Content/css")
+</head>
+<div ng-app="weather-app" ng-controller="WeatherCtrl">
+    <div ng-show="show.error" class="alert alert-info" role="alert">
+        <strong>Attention!</strong> There is wrong input data.
+    </div>
+    <div class="container">
+        <div class="row">
+            <h1> Location List </h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>City</th>
+                        <th>Country</th>
+                        <th>Temp</th>
+                        <th>Humidity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="city in locations">
+                        <td> {{ city.city }} </td>
+                        <td> {{ city.country }}</td>
+                        <td> {{ city.temperature }} </td>
+                        <td> {{ city.humidity }} % </td>
+                    </tr>
+                    <tr ng-if="locations.length == 0">
+                        <td colspan="2" class="text-center"> There are no data to display </td>
+                    </tr>
+
+                    <tr ng-if="states.showAddingForm">
+                        <td>
+                            <input type="text" class="form-control" placeholder="City" ng-model="search.City" />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Country" ng-model="search.Country" />
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" ng-click="addCity()"> Add </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-info" ng-click="showAddingForm(false)"> Cancel </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <a ng-click="showAddingForm(true); showErrorMessage(false)" class="btn btn-primary"> Add Location</a>
+        </div>
+    </div>
+</div>
